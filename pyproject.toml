@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mechai-model-selection"
+version = "0.3.0"
+description = "Observable-geometry model selection for mechanism-AI dynamical systems"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "Pengfei Song"}, {name = "Yin Song"}]
+keywords = ["scientific machine learning", "model selection", "information geometry", "dynamical systems", "uncertainty quantification"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Mathematics",
+]
+dependencies = ["numpy>=1.24", "scipy>=1.10", "torch>=2.1"]
+
+[project.optional-dependencies]
+bayes = ["arviz>=0.17"]
+test = ["pytest>=7", "pytest-cov>=4"]
+docs = ["sphinx>=7", "sphinx-rtd-theme>=2"]
+dev = ["build>=1", "twine>=5", "ruff>=0.5"]
+
+[project.urls]
+Homepage = "https://github.com/Song921012/mechai-model-selection"
+Documentation = "https://song921012.github.io/mechai-model-selection/"
+Repository = "https://github.com/Song921012/mechai-model-selection.git"
+Issues = "https://github.com/Song921012/mechai-model-selection/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

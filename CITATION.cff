@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it and the accompanying manuscript."
+title: "mechai-model-selection"
+type: software
+authors:
+  - family-names: Song
+    given-names: Pengfei
+  - family-names: Song
+    given-names: Yin
+version: 0.3.0
+date-released: 2026-08-02
+repository-code: "https://github.com/Song921012/mechai-model-selection"
+license: MIT
+preferred-citation:
+  type: article
+  title: "Observable Geometry for Model Selection in Mechanism-AI Dynamical Systems"
+  authors:
+    - family-names: Song
+      given-names: Pengfei
+    - family-names: Song
+      given-names: Yin
