@@ -1,7 +1,7 @@
 mechai-model-selection
 ======================
 
-Observable-geometry model selection for mechanism-AI dynamical systems.
+Geometric model selection for mechanism-AI dynamical systems.
 
 .. toctree::
    :maxdepth: 2
@@ -9,6 +9,7 @@ Observable-geometry model selection for mechanism-AI dynamical systems.
 
    quickstart
    geometry
+   criteria
    confidence
    api
    limitations

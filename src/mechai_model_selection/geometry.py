@@ -1,4 +1,4 @@
-"""Coordinate-covariant observable geometry."""
+"""Coordinate-covariant pullback geometry for statistical model manifolds."""
 
 from __future__ import annotations
 
@@ -44,11 +44,17 @@ def effective_dimension(eigenvalues: torch.Tensor, resolution: float = 1.0) -> t
     return torch.sum(values / (values + resolution))
 
 
-def relative_volume(eigenvalues: torch.Tensor, resolution: float = 1.0) -> torch.Tensor:
+def relative_log_volume(eigenvalues: torch.Tensor, resolution: float = 1.0) -> torch.Tensor:
+    """Log determinant ratio relative to the declared reference geometry."""
     if resolution <= 0:
         raise ValueError("resolution must be positive")
     values = torch.clamp(torch.as_tensor(eigenvalues), min=0.0)
     return torch.sum(torch.log1p(values / resolution))
+
+
+def relative_volume(eigenvalues: torch.Tensor, resolution: float = 1.0) -> torch.Tensor:
+    """Compatibility alias for :func:`relative_log_volume`."""
+    return relative_log_volume(eigenvalues, resolution)
 
 
 def observable_dimension(eigenvalues: torch.Tensor, resolution: float = 1.0) -> torch.Tensor:
@@ -60,7 +66,7 @@ def observable_dimension(eigenvalues: torch.Tensor, resolution: float = 1.0) -> 
 def observable_complexity(eigenvalues: torch.Tensor, resolution: float = 1.0) -> torch.Tensor:
     """Deprecated alias for :func:`relative_volume`."""
     warnings.warn("observable_complexity is deprecated; use relative_volume", DeprecationWarning, stacklevel=2)
-    return relative_volume(eigenvalues, resolution)
+    return relative_log_volume(eigenvalues, resolution)
 
 def resolution_profile(eigenvalues: torch.Tensor, resolutions: torch.Tensor) -> dict[str, torch.Tensor]:
     values = torch.as_tensor(eigenvalues)
@@ -120,7 +126,9 @@ def geometry_sensitivity_grid(
 
 
 @dataclass(frozen=True)
-class ObservableGeometry:
+class PullbackGeometry:
+    """Generalized spectrum and finite-resolution model-manifold geometry."""
+
     eigenvalues: torch.Tensor
     resolution: float = 1.0
 
@@ -130,7 +138,7 @@ class ObservableGeometry:
         information: torch.Tensor,
         reference_metric: torch.Tensor,
         resolution: float = 1.0,
-    ) -> ObservableGeometry:
+    ) -> PullbackGeometry:
         return cls(generalized_spectrum(information, reference_metric), resolution)
 
     @property
@@ -139,5 +147,20 @@ class ObservableGeometry:
 
     @property
     def complexity(self) -> float:
-        return float(relative_volume(self.eigenvalues, self.resolution))
+        return float(relative_log_volume(self.eigenvalues, self.resolution))
 
+    @property
+    def relative_log_volume(self) -> float:
+        return self.complexity
+
+
+class ObservableGeometry(PullbackGeometry):
+    """Deprecated compatibility name for :class:`PullbackGeometry`."""
+
+    def __init__(self, eigenvalues: torch.Tensor, resolution: float = 1.0) -> None:
+        warnings.warn(
+            "ObservableGeometry is deprecated; use PullbackGeometry",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        super().__init__(eigenvalues, resolution)

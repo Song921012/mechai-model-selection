@@ -5,16 +5,28 @@ from .classical import aic, aicc, bic, hqic, tic
 from .confidence import coverage_summary, geometric_confidence_region, quotient_rank
 from .geometry import (
     ObservableGeometry,
+    PullbackGeometry,
     block_reference_metric,
     effective_dimension,
     generalized_spectrum,
     geometry_sensitivity_grid,
     observable_complexity,
     observable_dimension,
+    relative_log_volume,
     relative_volume,
     resolution_profile,
 )
-from .ogic import gic_effective, gic_laplace, gic_volume, ogic_evidence, ogic_predictive
+from .ogic import (
+    generalized_optimism,
+    gic_bic_approximation,
+    gic_effective,
+    gic_evidence,
+    gic_laplace,
+    gic_predictive,
+    gic_volume,
+    ogic_evidence,
+    ogic_predictive,
+)
 from .selection import criterion_weights, model_average, selection_entropy, stacking_weights
 from .torch_ops import (
     fisher_pullback,
@@ -27,6 +39,7 @@ from .validation import aggregate_fold_deviance, predictive_deviance, rolling_or
 
 __all__ = [
     "ObservableGeometry",
+    "PullbackGeometry",
     "aggregate_fold_deviance",
     "aic",
     "aicc",
@@ -40,7 +53,11 @@ __all__ = [
     "generalized_spectrum",
     "geometric_confidence_region",
     "geometry_sensitivity_grid",
+    "generalized_optimism",
+    "gic_bic_approximation",
     "gic_effective",
+    "gic_evidence",
+    "gic_predictive",
     "gic_laplace",
     "gic_volume",
     "hqic",
@@ -53,6 +70,7 @@ __all__ = [
     "predictive_deviance",
     "pullback_geometry",
     "quotient_rank",
+    "relative_log_volume",
     "relative_volume",
     "residual_jacobian",
     "resolution_profile",

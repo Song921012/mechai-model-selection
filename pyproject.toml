@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "mechai-model-selection"
 version = "0.3.0"
-description = "Observable-geometry model selection for mechanism-AI dynamical systems"
+description = "Geometric model selection for mechanism-AI dynamical systems"
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"

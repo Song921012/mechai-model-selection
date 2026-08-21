@@ -1,12 +1,16 @@
 # Changelog
 
-## 0.3.0 - 2026-08-02
+## 0.3.0 - 2026-08-21
 
-- Added canonical `effective_dimension`, `relative_volume`, and `gic_laplace` APIs.
-- Retained deprecated compatibility names used by the manuscript experiments.
-- Added Fisher/Wasserstein pullbacks, quotient confidence, coverage summaries,
-  rolling validation, stacking, and trajectory model averaging documentation.
-- Added Sphinx documentation and GitHub Actions workflows.
+- Added PullbackGeometry, relative_log_volume, generalized_optimism,
+  gic_predictive, gic_evidence, and gic_bic_approximation.
+- Derived predictive-risk and local-evidence interfaces are now the canonical
+  API; arbitrary volume weighting is documented as sensitivity analysis.
+- Retained deprecated aliases required to read earlier experiment archives.
+- Added Fisher and Wasserstein pullbacks, quotient confidence, rolling
+  validation, stacking, model averaging, Sphinx documentation, and CI.
+- Added analytic tests for Gaussian optimism and evidence, large-sample
+  recovery, coordinate covariance, redundancy, and the volume derivative.
 
 ## 0.2.0
 
