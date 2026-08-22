@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1 - 2026-08-22
+
+- Correct `relative_volume` to return the reference-normalized geometric volume; `relative_log_volume` remains the evidence penalty.
+- Clarify the unpenalized-curvature convention in `generalized_optimism`.
+- Correct author metadata and align terminology with the manuscript.
 ## 0.3.0 - 2026-08-21
 
 - Added PullbackGeometry, relative_log_volume, generalized_optimism,

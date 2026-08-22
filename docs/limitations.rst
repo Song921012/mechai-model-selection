@@ -14,4 +14,4 @@ must be fixed by the scientific loss, not by the preferred ranking.
 
 Full Jacobian construction and dense eigendecomposition may be unsuitable for
 large neural networks. Matrix-free approximations are not part of version
-0.3.0.
+0.3.1.

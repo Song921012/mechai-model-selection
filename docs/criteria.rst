@@ -6,17 +6,17 @@ The package distinguishes predictive risk from model evidence.
 General loss-matched optimism
 -----------------------------
 
-For a penalized M-estimator, let A be the expected Hessian of the empirical
-loss plus the fitted penalty curvature, and let B be the score covariance.
-The generalized_optimism function returns trace(A^{-1} B). The corresponding
-risk criterion is empirical loss plus twice this quantity under deviance
-scaling.
+For a penalized M-estimator, let A0 be the expected Hessian of the unpenalized
+empirical loss, R the reference metric, lambda the fitted penalty strength, and
+B the score covariance. The generalized_optimism function returns
+trace((A0 + lambda R)^{-1} B). The corresponding criterion adds twice this
+quantity to empirical deviance.
 
 Predictive criterion
 --------------------
 
 When the likelihood is locally correct and the information identity applies,
-B = G and A = G + lambda R. The sandwich complexity becomes the effective
+B = G and A0 + lambda R = G + lambda R. The sandwich complexity becomes the effective
 dimension. The gic_predictive function therefore estimates out-of-sample
 deviance by adding 2 d_eff to the fitted deviance.
 

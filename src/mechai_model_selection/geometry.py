@@ -53,22 +53,33 @@ def relative_log_volume(eigenvalues: torch.Tensor, resolution: float = 1.0) -> t
 
 
 def relative_volume(eigenvalues: torch.Tensor, resolution: float = 1.0) -> torch.Tensor:
-    """Compatibility alias for :func:`relative_log_volume`."""
-    return relative_log_volume(eigenvalues, resolution)
+    """Return the reference-normalized geometric volume exp(C_vol / 2)."""
+    return torch.exp(0.5 * relative_log_volume(eigenvalues, resolution))
 
 
 def observable_dimension(eigenvalues: torch.Tensor, resolution: float = 1.0) -> torch.Tensor:
     """Deprecated alias for :func:`effective_dimension`."""
-    warnings.warn("observable_dimension is deprecated; use effective_dimension", DeprecationWarning, stacklevel=2)
+    warnings.warn(
+        "observable_dimension is deprecated; use effective_dimension",
+        DeprecationWarning,
+        stacklevel=2,
+    )
     return effective_dimension(eigenvalues, resolution)
 
 
 def observable_complexity(eigenvalues: torch.Tensor, resolution: float = 1.0) -> torch.Tensor:
-    """Deprecated alias for :func:`relative_volume`."""
-    warnings.warn("observable_complexity is deprecated; use relative_volume", DeprecationWarning, stacklevel=2)
+    """Deprecated alias for relative_log_volume."""
+    warnings.warn(
+        "observable_complexity is deprecated; use relative_log_volume",
+        DeprecationWarning,
+        stacklevel=2,
+    )
     return relative_log_volume(eigenvalues, resolution)
 
-def resolution_profile(eigenvalues: torch.Tensor, resolutions: torch.Tensor) -> dict[str, torch.Tensor]:
+
+def resolution_profile(
+    eigenvalues: torch.Tensor, resolutions: torch.Tensor
+) -> dict[str, torch.Tensor]:
     values = torch.as_tensor(eigenvalues)
     scales = torch.as_tensor(resolutions, dtype=values.dtype, device=values.device)
     if scales.ndim != 1 or torch.any(scales <= 0):
@@ -96,8 +107,10 @@ def block_reference_metric(
     if any(value <= 0 for value in block_precisions):
         raise ValueError("block precisions must be positive")
     diagonal = torch.cat(
-        [torch.full((size,), value, dtype=dtype, device=device)
-         for size, value in zip(block_sizes, block_precisions)]
+        [
+            torch.full((size,), value, dtype=dtype, device=device)
+            for size, value in zip(block_sizes, block_precisions)
+        ]
     )
     return torch.diag(diagonal)
 
@@ -152,6 +165,10 @@ class PullbackGeometry:
     @property
     def relative_log_volume(self) -> float:
         return self.complexity
+
+    @property
+    def relative_volume(self) -> float:
+        return float(torch.exp(0.5 * relative_log_volume(self.eigenvalues, self.resolution)))
 
 
 class ObservableGeometry(PullbackGeometry):

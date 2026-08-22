@@ -36,8 +36,9 @@ information matrix.
 
 ## What the criteria mean
 
-- generalized_optimism(A, B) computes the sandwich complexity
-  trace(A^{-1} B) for a loss-matched penalized estimator.
+- `generalized_optimism(A0, B, R, regularization)` computes the sandwich
+  complexity `trace((A0 + regularization * R)^{-1} B)` for a loss-matched
+  penalized estimator.
 - gic_predictive uses deviance plus 2 d_eff when the Fisher information
   identity is appropriate.
 - gic_evidence uses the normalized local-Gaussian evidence expression:
@@ -53,8 +54,12 @@ Laplace diagnostics, Fisher and one-dimensional Wasserstein pullbacks,
 geometric confidence regions on the identifiable quotient, blocked validation, stacking, and
 trajectory-valued model averaging.
 
-ObservableGeometry, observable_dimension, observable_complexity,
-ogic_predictive, and ogic_evidence remain as deprecated aliases so older
+`relative_log_volume` returns the log determinant ratio used by the evidence
+criterion; `relative_volume` returns the geometric-volume ratio
+`exp(relative_log_volume / 2)`.
+
+`ObservableGeometry`, `observable_dimension`, `observable_complexity`,
+`ogic_predictive`, and `ogic_evidence` remain as deprecated aliases so older
 result archives are readable. New code should use the canonical names shown
 above.
 

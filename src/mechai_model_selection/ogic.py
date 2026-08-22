@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-import warnings
 import math
+import warnings
 
 import torch
 
@@ -16,7 +16,11 @@ def generalized_optimism(
     reference_metric: torch.Tensor,
     regularization: float = 1.0,
 ) -> float:
-    """Return ``tr((A + regularization R)^-1 B)`` for a penalized M-estimator."""
+    """Return tr((A0 + regularization R)^-1 B).
+
+    risk_curvature is the unpenalized empirical-risk curvature A0; the penalty
+    curvature is added exactly once inside this function.
+    """
     if regularization < 0:
         raise ValueError("regularization must be nonnegative")
     a = torch.as_tensor(risk_curvature)
@@ -30,13 +34,14 @@ def generalized_optimism(
     solution = torch.linalg.solve(system, 0.5 * (b + b.mT))
     return float(torch.trace(solution))
 
+
 def gic_effective(
     deviance: float,
     geometry: PullbackGeometry,
     *,
     penalty_factor: float,
 ) -> float:
-    """Fit plus an observable-dimension penalty."""
+    """Fit plus an effective-dimension penalty."""
     if penalty_factor < 0:
         raise ValueError("penalty_factor must be nonnegative")
     return float(deviance) + float(penalty_factor) * geometry.effective_dimension
@@ -49,12 +54,17 @@ def gic_volume(
     penalty_factor: float,
     volume_weight: float = 1.0,
 ) -> float:
-    """Effective-dimension GIC plus invariant relative log-volume."""
+    """Sensitivity score with an additional relative-log-volume term."""
     if volume_weight < 0:
         raise ValueError("volume_weight must be nonnegative")
-    return gic_effective(
-        deviance, geometry, penalty_factor=penalty_factor,
-    ) + float(volume_weight) * geometry.complexity
+    return (
+        gic_effective(
+            deviance,
+            geometry,
+            penalty_factor=penalty_factor,
+        )
+        + float(volume_weight) * geometry.complexity
+    )
 
 
 def gic_predictive(deviance: float, geometry: PullbackGeometry) -> float:
@@ -64,7 +74,9 @@ def gic_predictive(deviance: float, geometry: PullbackGeometry) -> float:
 
 def ogic_predictive(deviance: float, geometry: PullbackGeometry) -> float:
     """Deprecated alias for :func:`gic_predictive`."""
-    warnings.warn("ogic_predictive is deprecated; use gic_predictive", DeprecationWarning, stacklevel=2)
+    warnings.warn(
+        "ogic_predictive is deprecated; use gic_predictive", DeprecationWarning, stacklevel=2
+    )
     return gic_predictive(deviance, geometry)
 
 
@@ -93,7 +105,7 @@ def gic_bic_approximation(
     geometry: PullbackGeometry,
     n_observations: int,
 ) -> float:
-    """Leading-order BIC-type approximation using finite-resolution rank."""
+    """Leading-order BIC-type approximation using effective dimension."""
     if n_observations <= 0:
         raise ValueError("n_observations must be positive")
     return gic_effective(deviance, geometry, penalty_factor=math.log(n_observations))

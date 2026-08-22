@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mechai-model-selection"
-version = "0.3.0"
+version = "0.3.1"
 description = "Geometric model selection for mechanism-AI dynamical systems"
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
 license-files = ["LICENSE"]
-authors = [{name = "Pengfei Song"}, {name = "Yin Song"}]
+authors = [{name = "Shuangshuang Yin"}, {name = "Pengfei Song"}]
 keywords = ["scientific machine learning", "model selection", "information geometry", "dynamical systems", "uncertainty quantification"]
 classifiers = [
   "Development Status :: 3 - Alpha",

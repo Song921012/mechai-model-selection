@@ -3,19 +3,19 @@ message: "If you use this software, please cite it and the accompanying manuscri
 title: "mechai-model-selection"
 type: software
 authors:
+  - family-names: Yin
+    given-names: Shuangshuang
   - family-names: Song
     given-names: Pengfei
-  - family-names: Song
-    given-names: Yin
-version: 0.3.0
-date-released: 2026-08-02
+version: 0.3.1
+date-released: 2026-08-22
 repository-code: "https://github.com/Song921012/mechai-model-selection"
 license: MIT
 preferred-citation:
   type: article
   title: "Geometric Model Selection for Mechanism-AI Dynamical Systems"
   authors:
+    - family-names: Yin
+      given-names: Shuangshuang
     - family-names: Song
       given-names: Pengfei
-    - family-names: Song
-      given-names: Yin

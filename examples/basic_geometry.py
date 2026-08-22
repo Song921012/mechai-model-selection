@@ -10,7 +10,6 @@ from mechai_model_selection import (
     gic_predictive,
 )
 
-
 information = torch.tensor([[12.0, 1.5], [1.5, 0.4]], dtype=torch.float64)
 reference = torch.tensor([[2.0, 0.0], [0.0, 1.0]], dtype=torch.float64)
 geometry = PullbackGeometry.from_matrices(information, reference, resolution=1.0)

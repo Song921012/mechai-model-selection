@@ -17,7 +17,7 @@ class PublicApiTests(unittest.TestCase):
     def test_canonical_geometry_names(self):
         values = torch.tensor([9.0, 1.0, 0.0], dtype=torch.float64)
         self.assertAlmostEqual(float(effective_dimension(values)), 1.4)
-        self.assertAlmostEqual(float(relative_volume(values)), math.log(20.0))
+        self.assertAlmostEqual(float(relative_volume(values)), math.sqrt(20.0))
 
     def test_laplace_name_and_compatibility_warning(self):
         geometry = ObservableGeometry(torch.tensor([9.0, 1.0], dtype=torch.float64))
