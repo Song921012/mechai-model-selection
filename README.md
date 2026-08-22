@@ -50,7 +50,7 @@ information matrix.
 
 The package also provides AIC, AICc, BIC, HQIC, TIC, DIC, WAIC, WBIC,
 Laplace diagnostics, Fisher and one-dimensional Wasserstein pullbacks,
-quotient confidence regions, blocked validation, stacking, and
+geometric confidence regions on the identifiable quotient, blocked validation, stacking, and
 trajectory-valued model averaging.
 
 ObservableGeometry, observable_dimension, observable_complexity,

@@ -1,4 +1,4 @@
-"""Rank-aware local confidence summaries for observable geometry."""
+"""Geometric confidence summaries on the locally identifiable quotient."""
 
 from __future__ import annotations
 

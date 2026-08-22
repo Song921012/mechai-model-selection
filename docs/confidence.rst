@@ -1,8 +1,9 @@
 Confidence and model averaging
 ==============================
 
-``geometric_confidence_region`` restricts a local Wald approximation to the
-numerically identifiable subspace. Rank reduction does not guarantee Gaussian
+``geometric_confidence_region`` defines a local geometric confidence region on the
+identifiable quotient, represented numerically by the resolved generalized
+eigenspace. Rank reduction does not guarantee Gaussian
 coverage under weak identification. ``coverage_summary`` reports Wilson
 intervals for repeated-sampling checks.
 
